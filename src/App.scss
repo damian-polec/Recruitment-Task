@@ -1,0 +1,33 @@
+.App {
+  padding-top: 50px;
+  .Form {
+    margin: 0 auto;
+    border-radius: 10px;
+    height: 75px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -10px #000;
+    .Autocomplete_Item {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .Is_Highlighted {
+      background: #FFC80B;
+    }
+    .Is_Not_Highlighted {
+      background: white;
+    }
+    div {
+      input {
+        width: 100%;
+        height: 100%;
+        font-size: 1.5rem;
+        border: none;
+      }
+    }
+  }
+}
