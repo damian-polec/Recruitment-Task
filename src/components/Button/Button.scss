@@ -1,4 +1,4 @@
-.Button {
+.Search_Button {
   width: 75px;
   height: 100%;
   border: none;
@@ -6,4 +6,36 @@
   color: #f9f9f9;
   text-transform: uppercase;
   font-size: 1.5rem;
+  &:hover {
+    cursor: pointer;
+    background: #1bcbd8;
+  }
+}
+
+.Accordion_Button {
+  margin: 2px auto;
+  height: 75px;
+  width: 50%;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  outline: none;
+  border-radius: 10px;
+  i {
+    margin: 1rem;
+  }
+  .City_Data {
+    display: flex;
+    align-items: center;
+    .City_Pollution {
+      font-size: 1.5rem;
+      padding: 0 0.5rem;
+    }
+  }
+  &:hover, &:focus {
+    cursor: pointer;
+    background: #f7cf4e;
+  }
 }

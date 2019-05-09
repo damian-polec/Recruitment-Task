@@ -4,7 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Button.scss';
 
 const button = (props) => (
-  <button className='Button'><FontAwesomeIcon icon='search' /></button>
+  <button
+    id={props.id} 
+    className={props.design}
+    onClick={props.click}>
+    {props.children}
+    {props.design === 'Search_Button' && (<i>{!props.isLoading ? <FontAwesomeIcon icon='search' /> : <FontAwesomeIcon icon='spinner' spin />}</i>)}
+    {props.design === 'Accordion_Button' && (<i>{!props.isActive ? <FontAwesomeIcon icon='plus' /> : <FontAwesomeIcon icon='minus' />}</i>)}
+  </button>
 )
 
 export default button;
