@@ -4,6 +4,7 @@ import { faSearch, faPlus, faMinus, faSpinner } from '@fortawesome/free-solid-sv
 import Autocomplete from 'react-autocomplete';
 import Button from './components/Button/Button';
 import CityDesc from './components/CityDesc/CityDesc';
+import ErrorHandler from './components/ErrorHandler/ErrorHandler';
 import './App.scss';
 
 library.add(faSearch, faPlus, faMinus, faSpinner);
@@ -17,25 +18,30 @@ const ITEMS = [
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [inputForm, setInputForm] = useState({
-    value: '',
-    isValid: false,
-    isTouched: false
-  })
+  const [inputForm, setInputForm] = useState('');
+  const [validation, setValidation] = useState(true);
   const [data, setData] = useState();
+  const [error, setError] = useState(null);
 
 
   const onChangeHandler = (event, value) => {
-    console.log(value);
-    setInputForm({
-      ...inputForm,
-      value: value
-    })
+    setInputForm(value)
   }
   const onSubmitHandler = (event) => {
     event.preventDefault();
     setIsLoading(true);
-    const country = ITEMS.find(country => country.name.toLowerCase() === inputForm.value.toLowerCase());
+    const userInput = inputForm
+    const isValidInput = ITEMS.findIndex(item => item.name === userInput);
+    if(isValidInput < 0) {
+      const error = new Error(
+        'Input should be one of those countries(Poland, Germany, France, Spain)'
+      )
+      setValidation(false);
+      setIsLoading(false);
+      setError(error);
+      return;
+    }
+    const country = ITEMS.find(country => country.name.toLowerCase() === inputForm.toLowerCase());
     const date = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).toISOString();
     fetch(`https://api.openaq.org/v1/measurements?country=${country.code}&date_from=${date}&parameter=pm25&order_by=value&sort=desc`)
     .then(res => {
@@ -52,7 +58,14 @@ const App = () => {
       }, []);
       setData(convertData);
       setIsLoading(false);
-    });
+    })
+    .catch(err => {
+      const error = new Error(
+        'Something went wrong. Try again later'
+      )
+      setError(error);
+    })
+    
   }
   const onToggleHandler = (cityName) => {
     const index = data.findIndex(city => city.city === cityName);
@@ -77,6 +90,11 @@ const App = () => {
     }
   }
 
+  const errorHandler = () => {
+    setValidation(true);
+    setError(null)
+  }
+
   let cities = null;
   if(data) {
     cities = data.map(city => {
@@ -99,11 +117,18 @@ const App = () => {
 
   return (
     <div className='App'>
+      <ErrorHandler 
+        error={error}
+        isValid={validation}
+        onHandle={errorHandler}/>
       <form 
         className='Form'
         onSubmit={(event) => onSubmitHandler(event)}>
         <Autocomplete
-          value={inputForm.value}
+          value={inputForm}
+          inputProps={{
+            placeholder: 'Country'
+          }}
           getItemValue={(item) => item.name}
           wrapperStyle={
             {
@@ -115,7 +140,7 @@ const App = () => {
           }
           items={ITEMS}
           onChange={(event, value) => onChangeHandler(event, value)}
-          onSelect={(val) => setInputForm({...inputForm, value: val})}
+          onSelect={(val) => setInputForm(val)}
           shouldItemRender= {(item, value) => {
             return item.name.substring(0, value.length).toLowerCase().indexOf(value.toLowerCase()) !== -1
           }}
@@ -128,7 +153,8 @@ const App = () => {
         />
         <Button 
           design='Search_Button'
-          isLoading={isLoading} />
+          isLoading={isLoading} 
+          isDisabled={isLoading}/>
       </form>
       {cities}
     </div>

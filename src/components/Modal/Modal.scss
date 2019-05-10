@@ -1,0 +1,35 @@
+.Modal {
+  position: fixed;
+  width: 33%;
+  left: 33%;
+  top: 20vh;
+  background: white;
+  border-radius: 5px;
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  .Modal_Header {
+    border-bottom: 2px solid #000;
+    padding: 1rem;
+    background: #FFC80B;
+  }
+  .Modal_Header h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: #000;
+    margin: 0;
+  }
+  .Modal_Content {
+    padding: 1rem;
+    border-bottom: 2px solid #000;
+  }
+  .Modal_Actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1rem;
+  }
+  
+  .Modal_Actions button {
+    margin: 0 0.5rem;
+  }
+}

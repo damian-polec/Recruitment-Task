@@ -1,6 +1,7 @@
 .App {
   padding-top: 50px;
   .Form {
+    position: relative;
     margin: 0 auto 5px auto;
     border-radius: 10px;
     height: 75px;
@@ -8,7 +9,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     box-shadow: 0 10px 30px -10px #000;
     .Autocomplete_Item {
       &:hover {
@@ -26,8 +26,40 @@
         width: 100%;
         height: 100%;
         font-size: 1.5rem;
+        padding: 0 1rem;
         border: none;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
       }
+    }
+  }
+}
+
+
+@media(max-width: 1439px) {
+  .App {
+    .Form {
+      div {
+        input {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 1023px) {
+  .App {
+    .Form {
+      width: 75%;
+    }
+  }
+}
+
+@media(max-width: 767px) {
+  .App {
+    .Form {
+      width: 95%;
     }
   }
 }

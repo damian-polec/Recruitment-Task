@@ -2,6 +2,8 @@
   width: 75px;
   height: 100%;
   border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   background: #3DD5E0;
   color: #f9f9f9;
   text-transform: uppercase;
@@ -14,9 +16,8 @@
 
 .Accordion_Button {
   margin: 2px auto;
-  height: 75px;
+  border: 2px solid #000;
   width: 50%;
-  border: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,5 +38,55 @@
   &:hover, &:focus {
     cursor: pointer;
     background: #f7cf4e;
+  }
+}
+
+.Modal_Button {
+  background: #f9f9f9;
+  color: #1cd149;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 33%;
+  border: 2px solid #27b14a;
+  border-radius: 10px;
+  margin: 1rem 0;
+  &:hover {
+    cursor: pointer;
+    background: #1cd149;
+    color: #fff;
+  }
+}
+
+@media(max-width: 1439px) {
+  .Accordion_Button {
+    .City_Data {
+      .City-Name {
+        font-size: 1.2rem;
+      }
+      .City_Pollution {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media(max-width: 1023px) {
+  .Accordion_Button {
+    width: 75%;
+  }
+}
+
+@media(max-width: 767px) {
+  .Accordion_Button {
+    width: 95%;
+    .City_Data {
+      .City-Name {
+        font-size: 1rem;
+      }
+      .City_Pollution {
+        font-size: .8rem;
+      }
+    }
   }
 }
