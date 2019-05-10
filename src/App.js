@@ -63,6 +63,7 @@ const App = () => {
       const error = new Error(
         'Something went wrong. Try again later'
       )
+      setIsLoading(false);
       setError(error);
     })
     
