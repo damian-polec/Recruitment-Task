@@ -68,7 +68,7 @@ module.exports = () => {
 
   config.plugins = [
     new HtmlWebpackPlugin({
-      template: __dirname + '/src/index.html',
+      template: __dirname + '/public/index.html',
       filename: 'index.html',
       inject: 'body'
     })
